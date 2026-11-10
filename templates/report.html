@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investigation Report | CyberShield</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 22px 8%;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #38bdf8;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .intro {
+            background: #164e63;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .panel {
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 18px 0 8px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font: inherit;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .hint {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        button {
+            padding: 13px 18px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .primary {
+            background: #0369a1;
+            color: white;
+            width: 100%;
+            margin-top: 22px;
+        }
+
+        .primary:hover {
+            background: #075985;
+        }
+
+        .print-button {
+            background: #15803d;
+            color: white;
+            margin-top: 15px;
+        }
+
+        .back {
+            display: inline-block;
+            margin: 5px 0 30px;
+            color: #0369a1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #generatedReport {
+            display: none;
+            background: white;
+            padding: 32px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        #generatedReport h2 {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .report-subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .report-field {
+            margin: 18px 0;
+            overflow-wrap: anywhere;
+            line-height: 1.7;
+        }
+
+        .report-field strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .report-text {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .disclaimer {
+            font-size: 12px;
+            color: #64748b;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 15px;
+            margin-top: 30px;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            header, .intro, #reportForm, .back, footer,
+            #generatedReport .print-button, .screen-only {
+                display: none !important;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #generatedReport {
+                display: block !important;
+                border: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .report-field {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🛡️ CyberShield</h1>
+    <p>Digital Forensics Investigation Report</p>
+</header>
+
+<main class="container">
+
+    <section class="intro">
+        <h2>📄 Investigation Report Generator</h2>
+        <p>Enter the investigation details and generate a printable report.</p>
+    </section>
+
+    <form class="panel" id="reportForm">
+        <h2>Case Information</h2>
+
+        <label for="caseId">Case ID</label>
+        <input type="text" id="caseId" placeholder="Example: CS-001" required>
+
+        <label for="investigator">Investigator Name</label>
+        <input type="text" id="investigator" placeholder="Enter investigator name" required>
+
+        <label for="date">Investigation Date</label>
+        <input type="date" id="date" required>
+
+        <label for="filename">Evidence File Name</label>
+        <input type="text" id="filename" placeholder="Example: sample.docx" required>
+
+        <label for="filetype">Evidence Type</label>
+        <select id="filetype" required>
+            <option value="">Select evidence type</option>
+            <option>Document</option>
+            <option>Image</option>
+            <option>Audio</option>
+            <option>Video</option>
+            <option>Archive</option>
+            <option>Other</option>
+        </select>
+
+        <label for="hash">SHA-256 Hash</label>
+        <input
+            type="text"
+            id="hash"
+            placeholder="Enter the 64-character SHA-256 hash"
+            pattern="[a-fA-F0-9]{64}"
+            title="Enter exactly 64 hexadecimal characters."
+            required
+        >
+        <p class="hint">Use the hash displayed by your Digital Forensics Analyzer.</p>
+
+        <label for="findings">Investigation Findings</label>
+        <textarea id="findings" placeholder="Describe what you actually examined and observed." required></textarea>
+
+        <label for="conclusion">Conclusion</label>
+        <textarea id="conclusion" placeholder="Summarize the results and any limitations." required></textarea>
+
+        <button class="primary" type="submit">Generate Report</button>
+    </form>
+
+    <section id="generatedReport">
+        <h2>Digital Forensics Investigation Report</h2>
+        <p class="report-subtitle">CyberShield | Evidence Examination Record</p>
+
+        <div class="report-field">
+            <strong>Case ID</strong>
+            <div id="outCaseId"></div>
+        </div>
+
+        <div class="report-field">
+            <strong>Investigator Name</strong>
+            <div id="outInvestigator"></div>
+        </div>
+
+        <div class="report-field">
+            <strong>Investigation Date</strong>
+            <div id="outDate"></div>
+        </div>
+
+        <div class="report-field">
+            <strong>Evidence File Name</strong>
+            <div id="outFilename"></div>
+        </div>
+
+        <div class="report-field">
+            <strong>Evidence Type</strong>
+            <div id="outFiletype"></div>
+        </div>
+
+        <div class="report-field">
+            <strong>SHA-256 Hash</strong>
+            <div id="outHash" class="report-text"></div>
+        </div>
+
+        <div class="report-field">
+            <strong>Investigation Findings</strong>
+            <div id="outFindings" class="report-text"></div>
+        </div>
+
+        <div class="report-field">
+            <strong>Conclusion</strong>
+            <div id="outConclusion" class="report-text"></div>
+        </div>
+
+        <p class="disclaimer">
+            This report records the information entered by the user.
+            The hash can help compare file integrity when compared with a
+            trusted reference hash. This report does not independently
+            verify authenticity, prove chain of custody, or determine
+            whether the file contains malware.
+        </p>
+
+        <button class="print-button" type="button" id="printButton">
+            Print / Save as PDF
+        </button>
+    </section>
+
+    <a class="back" href="{{ url_for('home') }}">← Back to Home</a>
+
+</main>
+
+<footer>
+    CyberShield | Digital Forensics Project
+</footer>
+
+<script>
+    const reportForm = document.getElementById("reportForm");
+    const generatedReport = document.getElementById("generatedReport");
+
+    reportForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const fields = [
+            ["caseId", "outCaseId"],
+            ["investigator", "outInvestigator"],
+            ["date", "outDate"],
+            ["filename", "outFilename"],
+            ["filetype", "outFiletype"],
+            ["hash", "outHash"],
+            ["findings", "outFindings"],
+            ["conclusion", "outConclusion"]
+        ];
+
+        for (const [inputId, outputId] of fields) {
+            document.getElementById(outputId).textContent =
+                document.getElementById(inputId).value.trim();
+        }
+
+        generatedReport.style.display = "block";
+        generatedReport.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    });
+
+    document.getElementById("printButton").addEventListener("click", function() {
+        window.print();
+    });
+
+    document.getElementById("date").value =
+        new Date().toLocaleDateString("en-CA");
+</script>
+
+</body>
+</html>

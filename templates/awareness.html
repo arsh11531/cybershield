@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Awareness | CyberShield</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 22px 8%;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #38bdf8;
+        }
+
+        header p {
+            color: #cbd5e1;
+            margin-bottom: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .intro {
+            background: #164e63;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .intro h2 {
+            margin-top: 0;
+        }
+
+        .tip {
+            background: white;
+            margin-bottom: 16px;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #0284c7;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .tip h3 {
+            margin-top: 0;
+            color: #0369a1;
+        }
+
+        .tip p {
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .back {
+            display: inline-block;
+            margin: 10px 0 30px;
+            background: #0f172a;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 7px;
+        }
+
+        .back:hover {
+            background: #0369a1;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🛡️ CyberShield</h1>
+        <p>Cybersecurity Awareness</p>
+    </header>
+
+    <main class="container">
+
+        <section class="intro">
+            <h2>Stay Safe Online</h2>
+            <p>Learn simple ways to protect yourself from common cyber threats.</p>
+        </section>
+
+        <section class="tip">
+            <h3>1. Use Strong Passwords</h3>
+            <p>Create long, unique passwords for your accounts. Avoid using the same password everywhere.</p>
+        </section>
+
+        <section class="tip">
+            <h3>2. Avoid Suspicious Links</h3>
+            <p>Do not click unknown links in emails, messages, or social media. Verify the sender before opening them.</p>
+        </section>
+
+        <section class="tip">
+            <h3>3. Protect Personal Information</h3>
+            <p>Never share your passwords, OTPs, banking details, or other sensitive information with strangers.</p>
+        </section>
+
+        <section class="tip">
+            <h3>4. Watch Out for Phishing</h3>
+            <p>Be careful with messages that create urgency or ask you to reveal personal information.</p>
+        </section>
+
+        <section class="tip">
+            <h3>5. Keep Software Updated</h3>
+            <p>Update your operating system, browser, and applications to help fix security weaknesses.</p>
+        </section>
+
+        <section class="tip">
+            <h3>6. Enable Two-Factor Authentication</h3>
+            <p>Use two-factor authentication when available to add another layer of protection to your accounts.</p>
+        </section>
+
+        <a class="back" href="{{ url_for('home') }}">← Back to Home</a>
+
+    </main>
+
+    <footer>
+        CyberShield | Cybersecurity Awareness Project
+    </footer>
+
+</body>
+</html>

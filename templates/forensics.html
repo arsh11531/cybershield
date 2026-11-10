@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Forensics Analyzer | CyberShield</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        header {
+            background: #0f172a;
+            color: white;
+            padding: 22px 8%;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #38bdf8;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .intro {
+            background: #164e63;
+            color: white;
+            text-align: center;
+            padding: 28px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .panel {
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 18px 0 10px;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 14px;
+            border: 1px dashed #94a3b8;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 18px;
+            padding: 14px;
+            border: none;
+            border-radius: 7px;
+            background: #0369a1;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #075985;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow-wrap: anywhere;
+        }
+
+        .success {
+            border-left: 5px solid #16a34a;
+        }
+
+        .detail {
+            padding: 13px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .detail strong {
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .hash {
+            overflow-wrap: anywhere;
+            font-family: monospace;
+            font-size: 14px;
+            background: #f1f5f9;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .copy-button {
+            margin-top: 10px;
+            background: #0f766e;
+        }
+
+        .note {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 16px;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        .back {
+            display: inline-block;
+            margin: 10px 0 30px;
+            color: #0369a1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🛡️ CyberShield</h1>
+    <p>Digital Forensics File Analyzer</p>
+</header>
+
+<main class="container">
+
+    <section class="intro">
+        <h2>🔍 Digital Evidence Analysis</h2>
+        <p>Record basic file information and calculate its SHA-256 hash.</p>
+    </section>
+
+    <section class="panel">
+        <h2>Upload a File</h2>
+        <p>Select a file to calculate its hash. Maximum file size: 10 MB.</p>
+
+        {% if error %}
+            <div class="error" role="alert">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            <label for="file">Choose evidence file</label>
+            <input
+                type="file"
+                id="file"
+                name="file"
+                required
+            >
+
+            <button type="submit">Analyze File</button>
+        </form>
+    </section>
+
+    {% if file_info %}
+    <section class="panel success" id="analysisResults">
+        <h2>✅ Analysis Results</h2>
+
+        <div class="detail">
+            <strong>File Name</strong>
+            <span>{{ file_info.filename }}</span>
+        </div>
+
+        <div class="detail">
+            <strong>File Size</strong>
+            <span>{{ "{:,}".format(file_info.size) }} bytes</span>
+        </div>
+
+        <div class="detail">
+            <strong>SHA-256 Hash</strong>
+            <div class="hash" id="hashValue">{{ file_info.sha256 }}</div>
+            <button class="copy-button" type="button" id="copyHash">
+                Copy SHA-256 Hash
+            </button>
+            <p id="copyMessage" aria-live="polite"></p>
+        </div>
+    </section>
+    {% endif %}
+
+    <section class="note">
+        <strong>Important:</strong> This tool calculates a file hash and
+        records basic details. It does not scan for malware, prove
+        authenticity, or independently determine whether a file is safe.
+        Uploaded file contents are processed in memory and are not saved
+        by this route.
+    </section>
+
+    <a class="back" href="{{ url_for('home') }}">← Back to Home</a>
+
+</main>
+
+<footer>
+    CyberShield | Digital Forensics Project
+</footer>
+
+<script>
+    const copyButton = document.getElementById("copyHash");
+
+    if (copyButton) {
+        copyButton.addEventListener("click", async function() {
+            const hash = document.getElementById("hashValue").textContent;
+            const message = document.getElementById("copyMessage");
+
+            try {
+                await navigator.clipboard.writeText(hash);
+                message.textContent = "Hash copied successfully.";
+                message.style.color = "#15803d";
+            } catch (error) {
+                message.textContent =
+                    "Copy was blocked by the browser. Select and copy the hash manually.";
+                message.style.color = "#b91c1c";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield Dashboard</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #183047;
+            background: #f1f5f9;
+        }
+        header {
+            background: #09243f;
+            color: white;
+            padding: 22px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        header h1 { margin: 0; }
+        header p { margin: 7px 0 0; color: #d4e5f5; }
+        .logout {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 7px;
+            color: white;
+            background: #087f8c;
+            text-decoration: none;
+        }
+        main { max-width: 1100px; margin: 35px auto; padding: 0 20px; }
+        .welcome { margin-bottom: 25px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 23px;
+            box-shadow: 0 4px 15px #102a430c;
+            border: 1px solid #e2e8f0;
+        }
+        .card h2 { color: #0b5269; margin-top: 0; }
+        .card p { color: #526579; line-height: 1.5; min-height: 45px; }
+        .card a {
+            display: inline-block;
+            margin-top: 8px;
+            background: #087f8c;
+            color: white;
+            padding: 10px 14px;
+            border-radius: 7px;
+            text-decoration: none;
+        }
+        .card a:hover, .logout:hover { background: #05636e; }
+        footer { text-align: center; padding: 20px; color: #657786; }
+        .message { padding: 10px; border-radius: 6px; margin-bottom: 18px; }
+        .success { background: #dcfce7; color: #166534; }
+        .error { background: #fee2e2; color: #991b1b; }
+        .info { background: #dbeafe; color: #1e40af; }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>🛡️ CyberShield</h1>
+            <p>Cybersecurity Awareness and Digital Forensics</p>
+        </div>
+        <div>
+            <span>Logged in as <strong>{{ session.get('username', 'User') }}</strong></span>
+            &nbsp;
+            <a class="logout" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </header>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        <div class="welcome">
+            <h2>Welcome to your Dashboard</h2>
+            <p>Select a feature below to continue.</p>
+        </div>
+
+        <div class="grid">
+            <section class="card">
+                <h2>Cybersecurity Awareness</h2>
+                <p>Learn safe internet practices and how to recognize common cyber threats.</p>
+                <a href="{{ url_for('awareness') }}">Open Awareness</a>
+            </section>
+
+            <section class="card">
+                <h2>Password Strength Checker</h2>
+                <p>Check the strength of a password and learn how to improve it.</p>
+                <a href="{{ url_for('password_checker') }}">Check Password</a>
+            </section>
+
+            <section class="card">
+                <h2>Cybersecurity Quiz</h2>
+                <p>Test your knowledge of online safety and cybersecurity.</p>
+                <a href="{{ url_for('quiz') }}">Start Quiz</a>
+            </section>
+
+            <section class="card">
+                <h2>Digital Forensics Analyzer</h2>
+                <p>Examine a file's basic details and generate its SHA-256 hash.</p>
+                <a href="{{ url_for('forensics') }}">Analyze File</a>
+            </section>
+
+            <section class="card">
+                <h2>Investigation Report</h2>
+                <p>Prepare a digital forensics investigation report for your case.</p>
+                <a href="{{ url_for('report') }}">Create Report</a>
+            </section>
+
+            <section class="card">
+                <h2>About CyberShield</h2>
+                <p>Learn about the project's objectives, features, and technologies.</p>
+                <a href="{{ url_for('about') }}">About Project</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>CyberShield — Student Cybersecurity Project</footer>
+</body>
+</html>

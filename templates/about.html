@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About CyberShield</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        header, footer {
+            background: #0f172a;
+            color: white;
+            padding: 22px 8%;
+        }
+
+        header h1 {
+            color: #38bdf8;
+            margin: 0;
+        }
+
+        main {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            background: #164e63;
+            color: white;
+            padding: 35px 25px;
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        .panel {
+            background: white;
+            padding: 25px;
+            margin-top: 22px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            line-height: 1.8;
+        }
+
+        .panel h2 {
+            color: #0369a1;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .back {
+            display: inline-block;
+            margin: 25px 0;
+            background: #0f172a;
+            color: white;
+            padding: 12px 18px;
+            text-decoration: none;
+            border-radius: 7px;
+        }
+
+        footer {
+            text-align: center;
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🛡️ CyberShield</h1>
+    <p>Cybersecurity Awareness & Digital Forensics</p>
+</header>
+
+<main>
+    <section class="hero">
+        <h2>About CyberShield</h2>
+        <p>A student project for learning cybersecurity and digital forensics.</p>
+    </section>
+
+    <section class="panel">
+        <h2>Project Overview</h2>
+        <p>
+            CyberShield is an educational web application developed using
+            Python and Flask. It introduces users to cybersecurity awareness
+            and basic digital evidence handling through simple interactive tools.
+        </p>
+    </section>
+
+    <section class="panel">
+        <h2>Project Objectives</h2>
+        <ul>
+            <li>Promote safe internet practices and cybersecurity awareness.</li>
+            <li>Demonstrate basic password strength checking.</li>
+            <li>Test cybersecurity knowledge using a quiz.</li>
+            <li>Calculate SHA-256 hashes for selected files.</li>
+            <li>Generate a basic digital forensics investigation report.</li>
+        </ul>
+    </section>
+
+    <section class="panel">
+        <h2>Technologies Used</h2>
+        <ul>
+            <li>Python</li>
+            <li>Flask framework</li>
+            <li>HTML and CSS</li>
+            <li>JavaScript</li>
+            <li>SHA-256 hashing</li>
+        </ul>
+    </section>
+
+    <section class="panel">
+        <h2>Learning Outcome</h2>
+        <p>
+            This project provides practical experience with web development,
+            cybersecurity awareness, file hashing, and basic report preparation.
+            The tools are for educational use and do not replace professional
+            malware analysis or a complete forensic investigation.
+        </p>
+    </section>
+
+    <a class="back" href="{{ url_for('home') }}">← Back to Home</a>
+</main>
+
+<footer>
+    CyberShield | Student Cybersecurity Project
+</footer>
+
+</body>
+</html>
